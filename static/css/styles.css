@@ -1,0 +1,29 @@
+#pieChart {
+    position:relative;
+    top:40%;
+    left:10px;
+    width:400px;
+    height: 400px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+#barChart {
+    position:relative;
+    top:40%;
+    height: 400px;
+    display: inline-block;
+    font-size: 12px;
+}
+
+#pieChart .title, #barChart .title{
+    font-weight: bold;
+}
+
+.slice {
+    font-size: 13px;
+    font-family: Verdana;
+    fill: white;
+    font-weight: bold;   
+    cursor: pointer;
+}
