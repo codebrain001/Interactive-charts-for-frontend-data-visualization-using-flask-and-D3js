@@ -11,7 +11,7 @@ churn_df = data_df[(data_df['Churn']=="Yes").notnull()]
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('base.html')
 
 def calculate_percentage(val, total):
     """Calculates the percentage of a value over a total"""

@@ -1,9 +1,8 @@
-d3.queue()
-	.defer(d3.json, pieChartDataUrl)
-    .defer(d3.json, barChartDataUrl)
-    .await(ready);
+const urls = [pieChartDataUrl, barChartDataUrl];
 
-function ready(error, dataset, datasetBarChart) {
-    d3PieChart(dataset, datasetBarChart);
-    d3BarChart(datasetBarChart);
-}
+Promise.all(urls.map(url => d3.json(url))).then(ready);
+
+function ready(dataset) {
+    d3PieChart(dataset[0], dataset[1]);
+    d3BarChart(dataset[1]);
+};

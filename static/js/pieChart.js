@@ -1,3 +1,4 @@
+
 const format = d3.format(".2f"); //Formatting numbers to two decimal place
 
 function d3PieChart(dataset, datasetBarChart){
@@ -8,17 +9,21 @@ function d3PieChart(dataset, datasetBarChart){
     innerRadius = outerRadius * .999,   
     innerRadiusFinal = outerRadius * .5,
     innerRadiusFinal3 = outerRadius* .45,
-    color = d3.scaleOrdinal(d3.schemeCategory10); // using the standard color scheme d3.schemeCategory10 for the categorical data
+    color = d3.scaleOrdinal(d3.schemeDark2); // using the standard color scheme d3.schemeCategory10 for the categorical data
 
     const vis = d3.select('#pieChart')
-        .append('svg:svg')
-        .data([dataset])
-        .attr('width', width)
-        .attr('height', height)
-        .append('svg:g')
-        .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")"); 
+        .append("svg")  
+        .data([dataset])    
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")   
+        .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")");
+        
+    const data = d3.pie() 
+        .sort(null)
+        .value(function(d){return d.measure;})(dataset);
 
-    const arc = d3.arc()
+    const arc = d3.arc()    
         .outerRadius(outerRadius)
         .innerRadius(0);
 
@@ -28,48 +33,42 @@ function d3PieChart(dataset, datasetBarChart){
 
     const arcFinal3 = d3.arc()
         .innerRadius(innerRadiusFinal3)
-        .outerRadius(outerRadius);   
-
-    const pie = d3.pie() 
-        .value(function(d) { return d.measure; }); 
+        .outerRadius(outerRadius); 
 
     const arcs = vis.selectAll("g.slice")
-        .data(pie)                     
+        .data(data)                     
         .enter()                       
         .append("svg:g")               
         .attr("class", "slice") 
         .on("mouseover", mouseover)
     	.on("mouseout", mouseout)
     	.on("click", up);
-
+    				
     arcs.append("svg:path")
-        .attr("fill", function(d, i) { return color(i); } )
-        .attr("d", arc)
-        .append("svg:title")
-        .text(function(d) { return d.data.category + ": " + format(d.data.measure)+"%"; });
+        .attr("fill", function(d, i) { return color(i); } ) 
+        .attr("d", arc)     
+		.append("svg:title") 
+        .text(function(d) { return d.category + ": " + format(d.measure)+"%"; });			
 
-    d3.selectAll("g.slice")
-        .selectAll("path")
-        .transition()
-        .duration(750)
-        .delay(10)
+    d3.selectAll("g.slice").selectAll("path").transition()
+		.duration(750)
+		.delay(10)
         .attr("d", arcFinal );
-
-     // Add a label to the larger arcs, translated to the arc centroid and rotated.
-    arcs.filter(function(d) { return d.endAngle - d.startAngle  > .2; })
-        .append("svg:text")
-        .attr("dy", ".35em")
-        .attr("text-anchor", "middle")
-        .attr("transform", function(d) { return "translate(" +  arcFinal.centroid(d) + ")"; })
-        .text(function(d) { return d.data.category; });
-
-    // Pie chart title          
-    vis.append("svg:text")
-        .attr("dy", ".35em")
-        .attr("text-anchor", "middle")
-        .text("Churn customers statistics")
-        .attr("class","title");
     
+    
+    arcs.filter(function(d) { return d.endAngle - d.startAngle > .1; })
+    .append("svg:text")
+    .attr("dy", "2px")
+    .attr("text-anchor", "middle")
+    .attr("transform", function(d) { return "translate(" + arcFinal.centroid(d) + ")"; })
+    .text(function(d) { return d.data.category; });
+
+    vis.append("svg:text")
+        .attr("dy", ".20em")
+        .attr("text-anchor", "middle")
+        .text("churned customers")
+        .attr("class","title");		    
+
     function mouseover() {
         d3.select(this).select("path").transition()
         .duration(750)
@@ -84,5 +83,6 @@ function d3PieChart(dataset, datasetBarChart){
 
     function up(d, i) {
         updateBarChart(d.data.category, color(i), datasetBarChart);
-    }
+     }
+
 }
