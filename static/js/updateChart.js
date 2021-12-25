@@ -1,16 +1,16 @@
 function updateBarChart(group, colorChosen, datasetBarChart) {
 	
-    var currentDatasetBarChart = datasetBarChosen(group, datasetBarChart);
+    var currentDatasetBarChart = get_percentage(group, datasetBarChart);
     
-    var basics = d3BarChartBase();
+    // var basics = d3BarChartBase();
 
-    var margin = basics.margin,
-        width = basics.width,
-       height = basics.height,
-        colorBar = basics.colorBar,
-        barPadding = basics.barPadding,
-        misc = basics.misc
-        ;
+    // var margin = basics.margin,
+    //     width = basics.width,
+    //    height = basics.height,
+    //     colorBar = basics.colorBar,
+    //     barPadding = basics.barPadding,
+    //     misc = basics.misc
+    //     ;
     
     var 	xScale = d3.scaleLinear()
         .domain([0, currentDatasetBarChart.length])
@@ -28,10 +28,10 @@ function updateBarChart(group, colorChosen, datasetBarChart) {
    // Title
    svg.selectAll("text.title") 
         .attr("x", (width + margin.left + margin.right)/2)
-        .attr("y", misc.title)
+        .attr("y", graph_misc.title)
         .attr("class","title")				
         .attr("text-anchor", "middle")
-        .text("Age-group Breakdown of Survivors from "+group)
+        .text("Tenure group for churned customers "+group)
     ;
       
    var plot = d3.select("#barChartPlot")
@@ -64,10 +64,10 @@ function updateBarChart(group, colorChosen, datasetBarChart) {
                return (i * (width / currentDatasetBarChart.length)) + ((width / currentDatasetBarChart.length - barPadding) / 2);
        })
        .attr("y", function(d) {
-               return yScale(d.measure) - misc.ylabel;
+               return yScale(d.measure) - graph_misc.ylabel;
        })
        .text(function(d) {
-            return formatAsInteger(d.measure)+"%";
+            return d.measure;
        })
        .attr("class", "yAxis")					 
     ;

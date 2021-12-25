@@ -1,15 +1,18 @@
+body {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
 #pieChart {
-    position:relative;
     top:40%;
     left:10px;
     width:400px;
     height: 400px;
     display: inline-block;
-    font-size: 12px;;
+    font-size: 12px;
 }
 
 #barChart {
-    position:relative;
     top:40%;
     height: 400px;
     display: inline-block;

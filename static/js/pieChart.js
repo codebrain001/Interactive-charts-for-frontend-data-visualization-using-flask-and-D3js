@@ -2,14 +2,14 @@
 const format = d3.format(".2f"); //Formatting numbers to two decimal place
 
 function d3PieChart(dataset, datasetBarChart){
-    const margin = {top:30, right:5, bottom:20, left:50};
+    const margin = {top:20, right:20, bottom:20, left:20};
     const width = 400 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom,
     outerRadius = Math.min(width, height) / 2,
     innerRadius = outerRadius * .999,   
     innerRadiusFinal = outerRadius * .5,
     innerRadiusFinal3 = outerRadius* .45,
-    color = d3.scaleOrdinal(d3.schemeDark2); // using the standard color scheme d3.schemeCategory10 for the categorical data
+    color = d3.scaleOrdinal(d3.schemeAccent); // using the standard color scheme d3.schemeCategory10 for the categorical data
 
     const vis = d3.select('#pieChart')
         .append("svg")  

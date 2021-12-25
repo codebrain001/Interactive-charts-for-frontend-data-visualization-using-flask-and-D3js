@@ -19,7 +19,8 @@
           <div id="pieChart"></div>
           <div id="barChart"></div>
         </div>
-        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="https://d3js.org/queue.v1.min.js"></script>
     <script>
         var pieChartDataUrl = "{{ url_for('get_piechart_data') }}";
         var barChartDataUrl = "{{ url_for('get_barchart_data') }}";
