@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive charts for frontend data visualization using flask and D3js">
+    <meta name="author" content="Aboze Brain John">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <title>Data Dashboard</title>
+</head>
+<body>
+    <section class="container">
+        <div class="about-project">
+            <section>
+                <h1>Project: Interactive charts for frontend data visualization using Flask and D3.js</h1>
+                <h2>Author: Aboze Brain John Jnr</h2>
+            </section>
+        </div>
+        <div class="visualization">
+            {% block content %}{% endblock %}
+        </div>    
+    </section>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!-- Serving JS (static) files -->
+    <script>
+        const pieChartDataUrl = "{{ url_for('get_piechart_data') }}"
+        const barChartDataUrl = "{{ url_for('get_barchart_data') }}"
+    </script>
+    <script src="{{ url_for('static', filename='js/data_url.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/pieChart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/barChart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/update.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</body>
+</html>
