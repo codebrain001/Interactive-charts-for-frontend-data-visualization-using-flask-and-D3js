@@ -1,21 +1,72 @@
-body {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
+/* Reset default browser settings */
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
+
+/* Remove default padding and margin */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* Set core body defaults */
+body {
+  position: fixed;
+  display: flex;
+  background: #fdfdfd;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  font-family: "Roboto Mono", monospace;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Make images easier to work with */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.about {
+    margin: 10% 2%;
+    width: 40%;
+    text-align: justify;
+
+}
+h1 {
+    text-decoration: underline; 
+    margin: 0.5em 0em; 
+}
+
+p, h2, h6 {
+    margin: 0.7em 0em;
+}
+
+a {
+    text-decoration: none;
+}
+
+.visualization {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width:60%;
+}
+
 #pieChart {
-    top:40%;
-    left:10px;
-    width:400px;
-    height: 400px;
-    display: inline-block;
-    font-size: 12px;
+    margin-top: 6em;
 }
 
 #barChart {
-    top:40%;
-    height: 400px;
-    display: inline-block;
+    margin-top: 6em;
+}
+
+#pieChart, #barChart{
     font-size: 12px;
 }
 
@@ -25,8 +76,8 @@ body {
 
 .slice {
     font-size: 8px;
-    font-family: Verdana;
+     font-family: "Roboto Mono", monospace;
     fill: white;
     font-weight: bold;   
     cursor: pointer;
-}
+} 

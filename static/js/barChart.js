@@ -1,10 +1,10 @@
 const group = "All";
 const margin = {top: 20, right: 10, bottom: 20, left: 20},
-width = 400 - margin.left - margin.right,
-height = 400 - margin.top - margin.bottom,
+width = 350 - margin.left - margin.right,
+height = 350 - margin.top - margin.bottom,
 colorBar = d3.scaleOrdinal(d3.schemeAccent),
 barPadding = 0.5,
-graph_misc = {ylabel: 5, xlabelH : 5, title:10};
+graph_misc = {ylabel: 4, xlabelH : 5, title:8};
 
 
 function get_percentage(group, datasetBarChart){

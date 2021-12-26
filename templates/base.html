@@ -7,23 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Home page</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Data Dashboard</title>
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
   </head>
   <body>
-    <section>
-        <h1>Project: Interactive charts for frontend data visualization using Flask and D3.js</h1>
-        <h2>Author: Aboze Brain John Jnr</h2>
-    </section>
-        <div class="container">
+        <div class="about">
+          <h1>Data Dashboard</h1>
+          <h2>Project: Interactive charts for frontend data visualization using flask and D3js</h2>
+          <h2>Author: Aboze Brain John</h2>
+          <p>Bio: Aboze Brain John is a Technology Business Analyst.
+             He has experience in Data Science and Analytics, Software Engineering, Product Research, and Technical Writing.</p>
+          <p>Project Overview: The project is focused on the analysis of churned customers.
+            This analysis is achieved using Python's Flask library to serve the data and Javascript D3.js library to visualize the analysis.
+            The use case is the Telco Customer Churn found on Kaggle <a href="https://www.kaggle.com/blastchar/telco-customer-churn">here</a>
+          </p>
+          <h4>The code can be found on Github <a href="https://github.com/codebrain001/Interactive-charts-for-frontend-data-visualization-using-flask-and-D3js">here</a></h4>
+          <h4>The article can be found on Logrocket blog <a href="#">here</a></h4>
+        <img src="{{ url_for('static', filename='logo.jpeg')}}" alt="Logrocket logo">
+        </div>
+   
+        <div class="visualization">
           <div id="pieChart"></div>
           <div id="barChart"></div>
         </div>
-        <script src="https://d3js.org/d3.v5.min.js"></script>
-        <script src="https://d3js.org/queue.v1.min.js"></script>
+        
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/queue.v1.min.js"></script>
     <script>
-        var pieChartDataUrl = "{{ url_for('get_piechart_data') }}";
-        var barChartDataUrl = "{{ url_for('get_barchart_data') }}";
+        const pieChartDataUrl = "{{ url_for('get_piechart_data') }}";
+        const barChartDataUrl = "{{ url_for('get_barchart_data') }}";
     </script>
     <script src="{{ url_for('static', filename='js/pieChart.js') }}"></script>
     <script src="{{ url_for('static', filename='js/barChart.js') }}"></script>
