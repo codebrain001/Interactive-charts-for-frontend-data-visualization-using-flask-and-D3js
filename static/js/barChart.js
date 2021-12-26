@@ -1,23 +1,23 @@
-const bins = "All";
+const group = "All";
 const margin = {top: 20, right: 10, bottom: 20, left: 20},
-width = 500 - margin.left - margin.right,
+width = 400 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom,
 colorBar = d3.scaleOrdinal(d3.schemeAccent),
 barPadding = 0.5,
 graph_misc = {ylabel: 5, xlabelH : 5, title:10};
 
 
-function get_percentage(bins, datasetBarChart){
+function get_percentage(group, datasetBarChart){
     const _ = [];
     for (instance in datasetBarChart){
-        if (datasetBarChart[instance].group==bins){
+        if (datasetBarChart[instance].group==group){
             _.push(datasetBarChart[instance])
         }
     } return _;
 }
 
 function d3BarChart(datasetBarChart){
-    defaultBarChart = get_percentage(bins, datasetBarChart);
+    defaultBarChart = get_percentage(group, datasetBarChart);
 
     const xScale = d3.scaleLinear()
         .domain([0, defaultBarChart.length])

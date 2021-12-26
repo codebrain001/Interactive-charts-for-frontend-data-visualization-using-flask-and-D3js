@@ -1,75 +1,66 @@
-function updateBarChart(group, colorChosen, datasetBarChart) {
-	
-    var currentDatasetBarChart = get_percentage(group, datasetBarChart);
-    
-    // var basics = d3BarChartBase();
+function updateBarChart(group, color, datasetBarChart){
+    const currentBarChart = get_percentage(group, datasetBarChart);
 
-    // var margin = basics.margin,
-    //     width = basics.width,
-    //    height = basics.height,
-    //     colorBar = basics.colorBar,
-    //     barPadding = basics.barPadding,
-    //     misc = basics.misc
-    //     ;
+    const xScale = d3.scaleLinear()
+        .domain([0, currentBarChart.length])
+        .range([0, width]);
+
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(currentBarChart, function(d) { return d.measure; })])
+        .range([height,0]);
     
-    var 	xScale = d3.scaleLinear()
-        .domain([0, currentDatasetBarChart.length])
-        .range([0, width])
-        ;
-    
-        
-    var yScale = d3.scaleLinear()
-      .domain([0, d3.max(currentDatasetBarChart, function(d) { return d.measure; })])
-      .range([height,0])
-      ;
-      
-   var svg = d3.select("#barChart svg");
-    
-   // Title
-   svg.selectAll("text.title") 
+    const bar = d3.select('#barChart svg');
+
+    //Add title to Barchart
+    bar.selectAll("text.title") 
         .attr("x", (width + margin.left + margin.right)/2)
         .attr("y", graph_misc.title)
         .attr("class","title")				
         .attr("text-anchor", "middle")
-        .text("Tenure group for churned customers "+group)
-    ;
-      
-   var plot = d3.select("#barChartPlot")
-       .datum(currentDatasetBarChart)
-       ;
+        .text("Tenure group for churned customers "+group);
 
-      plot.selectAll("rect")
-      .data(currentDatasetBarChart)
-      .transition()
+    const vis = d3.select('barChartPlot')
+        .datum(currentBarChart);
+
+    vis.selectAll('rect')
+        .data(currentBarChart)
+        .transition()
         .duration(750)
-        .attr("x", function(d, i) {
+        .attr('x',  (width + margin.left + margin.right)/2)
+        .attr('y', graph_misc.title)
+        .attr('class', 'title')
+        .attr('text-anchor', 'middle')
+        .text('Tenure group for churned customers '+group);
+
+    const plot = d3.select('#barChartPlot')
+        .datum(currentBarChart);
+    
+    plot.selectAll('rect')
+        .data(currentBarChart)
+        .transition()
+        .duration(750)
+        .attr('x', function(d,i){
             return xScale(i);
         })
-       .attr("width", width / currentDatasetBarChart.length - barPadding)   
-        .attr("y", function(d) {
-            return yScale(d.measure);
-        })  
+        .attr('width', width/currentBarChart.length - barPadding)
+        .attr('y', function(d){
+            return yScale(d.measure)
+        })
         .attr("height", function(d) {
             return height-yScale(d.measure);
         })
-        .attr("fill", colorChosen)
-        ;
-    
+        .attr("fill", color);
+
     plot.selectAll("text.yAxis")
-        .data(currentDatasetBarChart)
+        .data(currentBarChart)
         .transition()
         .duration(750)
-       .attr("text-anchor", "middle")
-       .attr("x", function(d, i) {
-               return (i * (width / currentDatasetBarChart.length)) + ((width / currentDatasetBarChart.length - barPadding) / 2);
-       })
-       .attr("y", function(d) {
-               return yScale(d.measure) - graph_misc.ylabel;
-       })
-       .text(function(d) {
-            return d.measure;
-       })
-       .attr("class", "yAxis")					 
-    ;
-    
+        .attr("text-anchor", "middle")
+        .attr("x", function(d, i) {
+            return (i * (width / currentBarChart.length)) + ((width / currentBarChart.length - barPadding) / 2);})
+        .attr("y", function(d) {
+            return yScale(d.measure) - graph_misc.ylabel;})
+        .text(function(d) {
+        return d.measure;})
+        .attr("class", "yAxis");
 }
