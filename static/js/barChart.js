@@ -24,7 +24,7 @@ function d3BarChart(datasetBarChart){
         .range([0, width]);
 
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(defaultBarChart, function(d) { return d.measure; })])
+        .domain([0, d3.max(defaultBarChart, function(d) { return d.value; })])
         .range([height, 0]);
 
     const bar = d3.select('#barChart')
@@ -53,10 +53,10 @@ function d3BarChart(datasetBarChart){
         })
         .attr("width", width / defaultBarChart.length - barPadding)   
         .attr("y", function(d) {
-            return yScale(d.measure);
+            return yScale(d.value);
         })  
         .attr("height", function(d) {
-            return height-yScale(d.measure);
+            return height-yScale(d.value);
         })
         .attr("fill", "#757077");
     
@@ -67,7 +67,7 @@ function d3BarChart(datasetBarChart){
         .enter()
         .append("text")
         .text(function(d) {
-                return d.measure;
+                return d.value;
         })
         .attr("text-anchor", "middle")
 
@@ -75,7 +75,7 @@ function d3BarChart(datasetBarChart){
                 return (i * (width / defaultBarChart.length)) + ((width / defaultBarChart.length - barPadding) / 2);
         })
         .attr("y", function(d) {
-                return (yScale(d.measure) - graph_misc.ylabel);
+                return (yScale(d.value) - graph_misc.ylabel);
         })
         .attr("class", "yAxis");
     
