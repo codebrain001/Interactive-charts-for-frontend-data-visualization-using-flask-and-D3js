@@ -59,15 +59,13 @@ a {
 }
 
 #pieChart {
-    margin-top: 6em;
+    margin-top: 4em;
+    font-size: 12px;
 }
 
 #barChart {
-    margin-top: 6em;
-}
-
-#pieChart, #barChart{
-    font-size: 12px;
+    font-size: 9px;
+    margin-top: 4em;
 }
 
 #pieChart .title, #barChart .title{

@@ -1,3 +1,3 @@
 # Interactive-charts-for-frontend-data-visualization-using-flask-and-D3js
 
-![Demo](static/Review.gif)
+![Demo](static/Demo.gif)
